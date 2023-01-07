@@ -50,29 +50,31 @@ void Move(){
             
             if(grid[nx][ny] == 0 && !visited[nx][ny]){  
                 visited[nx][ny] = true;
-                //cout << " found 0: (" << nx << ", " << ny << ", " << cnt << ", " << _wall << ")";
+                cout << " found 0: (" << nx << ", " << ny << ", " << cnt << ", " << _wall << ")";
                 //cross_wall[nx][ny] = 0;
                 cross_wall[nx][ny] = _wall;
                 Queue.push(make_pair(make_pair(nx, ny), cnt+1));
             }
             else if(grid[nx][ny] == 1 && !visited[nx][ny] && _wall == false){
                 visited[nx][ny] = true;
-                //cout << " found 1: (" << nx << ", " << ny << ", " << cnt << ", " << _wall << ")";
+                cout << " found 1: (" << nx << ", " << ny << ", " << cnt << ", " << _wall << ")";
                 cross_wall[nx][ny] = true;
                 Queue.push(make_pair(make_pair(nx, ny), cnt+1));
             }
             
+            /*
             // 이미 방문했다면 벽 뚫지 않고도 가는 방법을 무시하게 되므로, 추가하였음.
             else if(grid[nx][ny] == 0 && visited[nx][ny] && cross_wall[nx][ny] == true && _wall == false){
-                //cout << " update wall: (" << nx << ", " << ny << ", " << cnt << ", " << _wall << ")";
+                cout << " update wall: (" << nx << ", " << ny << ", " << cnt << ", " << _wall << ")";
                 cross_wall[nx][ny] = false;
                 Queue.push(make_pair(make_pair(nx, ny), cnt+1));
             }
+            */
             
             //else
                 //cout << " return" << '\n';
         }
-        //cout << '\n';
+        cout << '\n';
     }
     
     return;
