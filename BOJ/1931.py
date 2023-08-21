@@ -11,7 +11,7 @@ meeting = []
 for n in range(N):
     meeting.append(tuple(map(int, input().split())))
 
-meeting = sorted(meeting, key=lambda x:(x[1]), reverse=False)
+meeting = sorted(meeting, key=lambda x:(x[1], x[0]), reverse=False)
 print(meeting)
 max_number = 1
 end = meeting[0][1]
