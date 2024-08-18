@@ -62,7 +62,9 @@ def BFS():
             if in_range(nx, ny):
                 
                 if grid[nx][ny] == 1 and now_crushed < K and visited[nx][ny][now_crushed+1]==0:
-                # visited[nx][ny][now_crushed+1]==0: # 이렇게 하면 재방문하는데, 왜 맞지?
+                    # 아, 이전에 벽을 -1번 덜 뚫고 오는 경로에서, 즉, now_crushed를 소모하지 않고 오는 경우가 무시가 되버리는구나.
+                
+                    # visited[nx][ny][now_crushed+1]==0: # 이렇게 하면 재방문하는데, 왜 맞지?
                     # if now_crushed == 0 or visited[nx][ny][now_crushed-1] == 0:
                     # all([x == 0 for x in visited[nx][ny]])    # 내 생각엔 이 로직이 맞단 말이지... 이게 왜 틀리지? 재방문해서 최단경로 안나오는데.
                     visited[nx][ny][now_crushed+1] = now_counted + 1
