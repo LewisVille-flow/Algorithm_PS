@@ -15,27 +15,30 @@ def InRange(x, y):
 def BFS(graph):
     dir = [[0, 1, 0, -1],
            [1, 0, -1, 0]]
-    queue = deque()
+    # queue = deque()
     count = 0
     visited = set()
     
     for i in range(N):
         for j in range(N):
+            queue = deque()
+            
             if graph[i][j] is False and (i, j) not in visited:
                 
                 count += 1
                 visited.add((i, j))
                 queue.append((i, j))
                 
-                while queue:
-                    cx, cy = queue.popleft()
+            while queue:
+                cx, cy = queue.popleft()
+                
+                for x, y in zip(*dir):
+                    nx, ny = cx+x, cy+y
                     
-                    for x, y in zip(*dir):
-                        nx, ny = cx+x, cy+y
+                    if InRange(nx, ny) and graph[nx][ny] is False and (nx, ny) not in visited:
+                        visited.add((nx, ny))
+                        queue.append((nx, ny))
                         
-                        if InRange(nx, ny) and graph[nx][ny] is False and (nx, ny) not in visited:
-                            queue.append((nx, ny))
-                            visited.add((nx, ny))
     return count   
 
 
@@ -45,14 +48,25 @@ def Solve():
     # input
     N = int(input())
     graph = [list(map(int, input().split())) for _ in range(N)]
-    under = [list(False for _ in range(N)) for _ in range(N)]
+    # under = [list(False for _ in range(N)) for _ in range(N)]
+    
     # min max
-    _min = min(min(graph[i] for i in range(N)))
-    _max = max(max(graph[i] for i in range(N)))
+    _max, _min = -1, 101
+    for i in range(N):
+        mv, nv = max(graph[i]), min(graph[i])
+        if mv > _max:
+            _max = mv
+        if nv < _min:
+            _min = nv
+        
+    # _min = min(min(graph[i] for i in range(N)))
+    # _max = max(max(graph[i] for i in range(N)))
     
     # rain
     max_area = 1
     for rain in range(_min, _max):
+        under = [list(False for _ in range(N)) for _ in range(N)]
+        
         for i in range(N):
             for j in range(N):
                 if graph[i][j] <= rain:
